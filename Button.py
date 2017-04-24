@@ -34,18 +34,19 @@ class Button(pygame.sprite.Sprite):
         pass
 
 class StartGameButton(Button):
-    def __init__(self):
+    def __init__(self, game):
         super().__init__("Resources/StartButton.png")
+        self.game = game
 
-    def Clicked(self, game):  # Set game state to playing
-        game.StartPlaying()
+    def Clicked(self):  # Set game state to playing
+        self.game.StartPlaying()
 
 class ExitGameButton(Button):
-    def __init__(self):
-        pass
+    def __init__(self, game):
+        self.game = game
 
-    def Clicked(self, game):  # Set game running to false
-        game.running = False
+    def Clicked(self):  # Set game running to false
+        self.game.running = False
 
 class ContinueGameButton(Button):
     def __init__(self):

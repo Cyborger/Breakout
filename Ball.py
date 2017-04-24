@@ -2,16 +2,16 @@ import pygame
 import Block
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x, y):
         self.image = pygame.image.load("Resources/Ball.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.move_x = 0.0
         self.move_y = 0.0
-        self.base_speed = 3.0
+        self.base_speed = 4.0
         self.x_speed = self.base_speed
         self.y_speed = self.base_speed
-        self.rect.x = 200.0
-        self.rect.y = 300.0
+        self.rect.x = x
+        self.rect.y = y
 
     def UpdateMovement(self, collisions):  # Move at a constant speed
         self.move_x = 0.0
@@ -30,7 +30,7 @@ class Ball(pygame.sprite.Sprite):
                 self.rect.top = collide.rect.bottom
             if isinstance(collide, Block.Block):
                 collide.Break()
-                
+
         if collisions:
             self.InvertYSpeed()
 
@@ -44,7 +44,7 @@ class Ball(pygame.sprite.Sprite):
         if collisions:
             self.InvertXSpeed()
 
-    def CheckForOutOfBoundry(self, level_width, level_height):  # Make sure it doesn't go off screen, except for bottom side
+    def CheckForOutOfBoundry(self, level_width, level_height, no_bottom = True):  # Make sure it doesn't go off screen, except for bottom side
         if self.rect.right > level_width:
             self.rect.right = level_width
             self.InvertXSpeed()
@@ -55,6 +55,11 @@ class Ball(pygame.sprite.Sprite):
         if self.rect.top < 0:
             self.rect.top = 0
             self.InvertYSpeed()
+
+        if not no_bottom:
+            if self.rect.bottom > level_height:
+                self.rect.bottom = level_height
+                self.InvertYSpeed()
 
     def InvertXSpeed(self):
         self.x_speed *= -1.0
