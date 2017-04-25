@@ -23,6 +23,12 @@ class Level:
                 elif type_of_block == "Orange":
                     new_block = Block.OrangeBlock(x * tile_width, y * tile_height)
                     self.all_blocks.append(new_block)
+                elif type_of_block == "Purple":
+                    new_block = Block.PurpleBlock(x * tile_width, y * tile_height)
+                    self.all_blocks.append(new_block)
+                elif type_of_block == "Black":
+                    new_block = Block.BlackBlock(x * tile_width, y * tile_height)
+                    self.all_blocks.append(new_block)
 
     def UpdateBlocks(self):
         for block in self.blocks:

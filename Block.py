@@ -19,6 +19,8 @@ class Block(pygame.sprite.Sprite):
 
     def Hit(self):  # Has been hit
         self.hits += 1
+        if self.hits > self.animation.tiles_high - 1:
+            self.hits = self.animation.tiles_high - 1
         self.image = self.animation.GetImage(0, self.hits)
 
     def Update(self):
@@ -44,3 +46,15 @@ class OrangeBlock(Block):
         animation = Spritesheet.Spritesheet("Resources/OrangeBlock.png", 1, 3, 1)
         super().__init__(animation, x, y)
         self.hits_needed = 2
+
+class PurpleBlock(Block):
+    def __init__(self, x, y):
+        animation = Spritesheet.Spritesheet("Resources/PurpleBlock.png", 1, 4, 1)
+        super().__init__(animation, x, y)
+        self.hits_needed = 3
+
+class BlackBlock(Block):
+    def __init__(self, x, y):
+        animation = Spritesheet.Spritesheet("Resources/BlackBlock.png", 1, 5, 1)
+        super().__init__(animation, x, y)
+        self.hits_needed = 4

@@ -2,6 +2,7 @@ import GameState
 import Paddle
 import Ball
 import Timer
+import pygame
 
 class PlayingState(GameState.GameState):
     def __init__(self, game, level):
@@ -13,6 +14,14 @@ class PlayingState(GameState.GameState):
         self.current_level = level
         self.current_level.ResetLevel()
         self.wait_for_start = Timer.Timer(100)
+
+    def HandleEvents(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.game.running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    self.game.Pause()
 
     def Update(self):  # Update paddle and ball
         self.wait_for_start.Update()

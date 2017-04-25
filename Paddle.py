@@ -9,9 +9,13 @@ class Paddle(pygame.sprite.Sprite):
         self.move_speed = 6.0
 
     def UpdateMovement(self):  # Check for movement and stuff
-        if pygame.key.get_pressed()[pygame.K_LEFT]:
+        if (pygame.key.get_pressed()[pygame.K_LEFT]
+        or pygame.mouse.get_pressed()[0]
+        or pygame.key.get_pressed()[pygame.K_a]):
             self.rect.x -= self.move_speed
-        if pygame.key.get_pressed()[pygame.K_RIGHT]:
+        if (pygame.key.get_pressed()[pygame.K_RIGHT]
+        or pygame.mouse.get_pressed()[2]
+        or pygame.key.get_pressed()[pygame.K_d]):
             self.rect.x += self.move_speed
 
     def CheckOutOfBoundry(self, level_width, level_height):  # Make sure the paddle doesnt go off the screen

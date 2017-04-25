@@ -1,5 +1,8 @@
 import pygame
 import Block
+import Paddle
+import random
+import math
 
 class Ball(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -7,11 +10,13 @@ class Ball(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.move_x = 0.0
         self.move_y = 0.0
-        self.base_speed = 4.0
-        self.x_speed = self.base_speed
-        self.y_speed = self.base_speed
+        self.base_speed = 6.0
+        self.current_speed = self.base_speed
+        self.x_speed = self.current_speed / 2
+        self.y_speed = self.GetCorrespondingY()
         self.rect.x = x
         self.rect.y = y
+        random.seed()
 
     def UpdateMovement(self, collisions):  # Move at a constant speed
         self.move_x = 0.0
@@ -30,6 +35,8 @@ class Ball(pygame.sprite.Sprite):
                 self.rect.top = collide.rect.bottom
             if isinstance(collide, Block.Block):
                 collide.Hit()
+            elif isinstance(collide, Paddle.Paddle):
+                self.RandomBounce()
 
         if collisions:
             self.InvertYSpeed()
@@ -60,6 +67,15 @@ class Ball(pygame.sprite.Sprite):
             if self.rect.bottom > level_height:
                 self.rect.bottom = level_height
                 self.InvertYSpeed()
+
+    def RandomBounce(self):
+        random_value = random.uniform(-self.current_speed + 1, self.current_speed - 1)
+        self.x_speed = random_value
+        self.y_speed = self.GetCorrespondingY()
+
+    def GetCorrespondingY(self):
+        new_y = math.sqrt(self.current_speed**2 - self.x_speed**2)
+        return new_y
 
     def InvertXSpeed(self):
         self.x_speed *= -1.0

@@ -1,5 +1,7 @@
 import StartMenuState
 import PlayingState
+import PauseState
+import GameoverState
 import Level
 import pygame
 
@@ -17,6 +19,7 @@ class Game:
         self.clock = pygame.time.Clock()
 
     def Start(self):  # Set starting menu and stuff
+        self.ClearStates()
         start_menu_state = StartMenuState.StartMenuState(self)
         self.NewState(start_menu_state)
         self.GameLoop()
@@ -25,12 +28,17 @@ class Game:
         playing_state = PlayingState.PlayingState(self, self.levels[0])
         self.NewState(playing_state)
 
+    def Pause(self):
+        pause_state = PauseState.PauseState(self)
+        self.NewState(pause_state)
+
     def ContinuePlaying(self):
         self.ChangeState(self.FindState("playing"))
+        self.RemoveState(self.FindState("paused"))
 
     def GameOver(self):
-        self.ClearStates()
-        self.Start()
+        gameover_state = GameoverState.GameoverState(self)
+        self.NewState(gameover_state)
 
     def ChangeState(self, state):  # See if state exists in states and act accordingly
         self.current_state = state
