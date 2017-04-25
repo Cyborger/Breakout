@@ -6,8 +6,10 @@ class Spritesheet:
         if scale != 1:
             self.image = pygame.transform.scale(self.image, (self.image.get_width() * scale,
                                                              self.image.get_height() * scale))
-        self.tile_width = self.image.get_width() / tiles_wide
-        self.tile_height = self.image.get_height() / tiles_high
+        self.tiles_wide = tiles_wide
+        self.tiles_high = tiles_high
+        self.tile_width = self.image.get_width() / self.tiles_wide
+        self.tile_height = self.image.get_height() / self.tiles_high
 
     def GetImage(self, x, y):
         new_image = self.image.subsurface((x * self.tile_width, y * self.tile_height,

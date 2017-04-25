@@ -29,7 +29,7 @@ class Ball(pygame.sprite.Sprite):
             elif self.move_y < 0.0:
                 self.rect.top = collide.rect.bottom
             if isinstance(collide, Block.Block):
-                collide.Break()
+                collide.Hit()
 
         if collisions:
             self.InvertYSpeed()

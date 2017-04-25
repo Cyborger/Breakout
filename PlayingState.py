@@ -1,7 +1,7 @@
 import GameState
 import Paddle
 import Ball
-import copy
+import Timer
 
 class PlayingState(GameState.GameState):
     def __init__(self, game, level):
@@ -12,19 +12,21 @@ class PlayingState(GameState.GameState):
         self.balls = [starting_ball]
         self.current_level = level
         self.current_level.ResetLevel()
-        self.frame_wait = 100
-        self.frame_counter = 0
+        self.wait_for_start = Timer.Timer(100)
 
     def Update(self):  # Update paddle and ball
-        self.frame_counter += 1
-        if self.frame_counter >= self.frame_wait:
+        self.wait_for_start.Update()
+        if self.wait_for_start.complete:
+            # Update paddle
             self.paddle.UpdateMovement()
             self.paddle.CheckOutOfBoundry(self.current_level.width, self.current_level.height)
+            # Update balls
             for ball in self.balls:
                 possible_collisions = self.current_level.blocks + [self.paddle]
                 ball.UpdateMovement(possible_collisions)
                 ball.CheckForOutOfBoundry(self.current_level.width, self.current_level.height)
-            self.current_level.RemoveDestroyedBlocks()
+            # Update blocks
+            self.current_level.UpdateBlocks()
         self.RemoveLostBalls()
 
 

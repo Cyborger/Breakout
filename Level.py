@@ -15,15 +15,22 @@ class Level:
         tile_width = self.tmx.tilewidth
         tile_height = self.tmx.tileheight
         for layer in self.tmx.layers:
-            if layer.name == "Blue Blocks":
-                for x, y, image in layer.tiles():
+            for x, y, image in layer.tiles():
+                type_of_block = self.tmx.get_tile_properties(x, y, self.tmx.layers.index(layer))["Type"]
+                if type_of_block == "Blue":
                     new_block = Block.BlueBlock(x * tile_width, y * tile_height)
                     self.all_blocks.append(new_block)
+                elif type_of_block == "Orange":
+                    new_block = Block.OrangeBlock(x * tile_width, y * tile_height)
+                    self.all_blocks.append(new_block)
 
-    def RemoveDestroyedBlocks(self):
+    def UpdateBlocks(self):
         for block in self.blocks:
+            block.Update()
             if block.broken:
                 self.blocks.remove(block)
 
     def ResetLevel(self):
-        self.blocks = copy.copy(self.all_blocks)
+        self.blocks = self.all_blocks[:]
+        for block in self.blocks:
+            block.Reset()
