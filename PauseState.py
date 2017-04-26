@@ -3,8 +3,7 @@ import pygame
 
 class PauseState(GameState.GameState):
     def __init__(self, game):
-        self.name = "paused"
-        self.game = game
+        super().__init__(game, "paused")
 
     def HandleEvents(self):
         for event in pygame.event.get():

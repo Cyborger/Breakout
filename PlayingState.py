@@ -6,8 +6,8 @@ import pygame
 
 class PlayingState(GameState.GameState):
     def __init__(self, game, level):
-        self.name = "playing"
-        self.game = game
+        super().__init__(game, "playing")
+
         self.paddle = Paddle.Paddle()
         starting_ball = Ball.Ball(720 / 2, 300)
         self.balls = [starting_ball]

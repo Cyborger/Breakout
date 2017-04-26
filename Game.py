@@ -16,7 +16,7 @@ class Game:
         self.states = []
         self.current_state = None
         self.running = True
-        level_1 = Level.Level("Resources\TMX\Level3.tmx")
+        level_1 = Level.Level("Resources\TMX\Level1.tmx")
         level_1.CreateLevel()
         self.levels = [level_1]
         self.clock = pygame.time.Clock()

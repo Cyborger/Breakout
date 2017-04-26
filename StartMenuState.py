@@ -5,13 +5,12 @@ import Ball
 
 class StartMenuState(GameState.GameState):
     def __init__(self, game):
-        self.name = "startmenu"
-        self.game = game
+        super().__init__(game, "startmenu")
+        
         start = Button.StartGameButton(self.game)
         start.SetPosition(game.screen_width / 2 - start.rect.width /2,
                           game.screen_height / 2 - start.rect.height / 2)
         self.buttons = [start]
-        self.mouse_pos = None
         ball_1 = Ball.Ball(200, 300)
         ball_2 = Ball.Ball(400, 200)
         ball_2.InvertXSpeed()
@@ -32,7 +31,7 @@ class StartMenuState(GameState.GameState):
                         button.Clicked()
 
     def Update(self): # Update GUI
-        self.mouse_pos = pygame.mouse.get_pos()
+        self.GetMousePos()
         for button in self.buttons:
             button.Update(self.mouse_pos)
 

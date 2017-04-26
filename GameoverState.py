@@ -3,8 +3,7 @@ import pygame
 
 class GameoverState(GameState.GameState):
     def __init__(self, game):
-        self.name = "gameover"
-        self.game = game
+        super().__init__(game, "gameover")
 
     def HandleEvents(self):
         for event in pygame.event.get():
