@@ -10,9 +10,9 @@ class Ball(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.move_x = 0.0
         self.move_y = 0.0
-        self.base_speed = 6.0
+        self.base_speed = 3.0
         self.current_speed = self.base_speed
-        self.x_speed = self.current_speed / 2
+        self.x_speed = self.current_speed / 2.0
         self.y_speed = self.GetCorrespondingY()
         self.rect.x = x
         self.rect.y = y
@@ -52,26 +52,26 @@ class Ball(pygame.sprite.Sprite):
             self.InvertXSpeed()
 
     def CheckForOutOfBoundry(self, level_width, level_height, no_bottom = True):  # Make sure it doesn't go off screen, except for bottom side
-        if self.rect.right > level_width:
+        if self.rect.right >= level_width:
             self.rect.right = level_width
             self.InvertXSpeed()
-        elif self.rect.left < 0:
-            self.rect.left = 0
+        elif self.rect.x < 0:
+            self.rect.x = 0
             self.InvertXSpeed()
 
-        if self.rect.top < 0:
+        if self.rect.top <= 0:
             self.rect.top = 0
             self.InvertYSpeed()
 
         if not no_bottom:
-            if self.rect.bottom > level_height:
+            if self.rect.bottom >= level_height:
                 self.rect.bottom = level_height
                 self.InvertYSpeed()
 
     def RandomBounce(self):
-        random_value = random.uniform(-self.current_speed + 1, self.current_speed - 1)
+        random_value = random.uniform(-self.current_speed + 1.0, self.current_speed - 1.0)
         self.x_speed = random_value
-        self.y_speed = self.GetCorrespondingY()
+        self.y_speed = 3
 
     def GetCorrespondingY(self):
         new_y = math.sqrt(self.current_speed**2 - self.x_speed**2)

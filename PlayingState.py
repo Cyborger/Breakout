@@ -9,7 +9,7 @@ class PlayingState(GameState.GameState):
         self.name = "playing"
         self.game = game
         self.paddle = Paddle.Paddle()
-        starting_ball = Ball.Ball(200, 300)
+        starting_ball = Ball.Ball(720 / 2, 300)
         self.balls = [starting_ball]
         self.current_level = level
         self.current_level.ResetLevel()

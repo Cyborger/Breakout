@@ -7,13 +7,13 @@ import pygame
 
 class Game:
     def __init__(self):
-        self.screen_width = 48*16
-        self.screen_height = 700
+        self.screen_width = 720
+        self.screen_height = 405
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         self.states = []
         self.current_state = None
         self.running = True
-        level_1 = Level.Level("Resources/TestLevel.tmx")
+        level_1 = Level.Level("Resources\TMX\Level1.tmx")
         level_1.CreateLevel()
         self.levels = [level_1]
         self.clock = pygame.time.Clock()
@@ -66,4 +66,4 @@ class Game:
             self.current_state.ClearScreen()
             self.current_state.DrawScreen()
             self.current_state.UpdateDisplay()
-            self.clock.tick(60)
+            self.clock.tick(120)

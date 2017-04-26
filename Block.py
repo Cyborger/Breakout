@@ -37,24 +37,24 @@ class Block(pygame.sprite.Sprite):
 
 class BlueBlock(Block):
     def __init__(self, x, y):
-        animation = Spritesheet.Spritesheet("Resources/BlueBlock.png", 1, 2, 1)
+        animation = Spritesheet.Spritesheet("Resources/Blocks/BlueBlock.png", 1, 2, 1)
         super().__init__(animation, x, y)
         self.hits_needed = 1
 
 class OrangeBlock(Block):
     def __init__(self, x, y):
-        animation = Spritesheet.Spritesheet("Resources/OrangeBlock.png", 1, 3, 1)
+        animation = Spritesheet.Spritesheet("Resources/Blocks/OrangeBlock.png", 1, 3, 1)
         super().__init__(animation, x, y)
         self.hits_needed = 2
 
 class PurpleBlock(Block):
     def __init__(self, x, y):
-        animation = Spritesheet.Spritesheet("Resources/PurpleBlock.png", 1, 4, 1)
+        animation = Spritesheet.Spritesheet("Resources/Blocks/PurpleBlock.png", 1, 4, 1)
         super().__init__(animation, x, y)
         self.hits_needed = 3
 
 class BlackBlock(Block):
     def __init__(self, x, y):
-        animation = Spritesheet.Spritesheet("Resources/BlackBlock.png", 1, 5, 1)
+        animation = Spritesheet.Spritesheet("Resources/Blocks/BlackBlock.png", 1, 5, 1)
         super().__init__(animation, x, y)
         self.hits_needed = 4

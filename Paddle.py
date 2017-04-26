@@ -4,9 +4,9 @@ class Paddle(pygame.sprite.Sprite):
     def __init__(self):
         self.image = pygame.image.load("Resources/Paddle.png").convert_alpha()
         self.rect = self.image.get_rect()
-        self.rect.x = 200
-        self.rect.y = 600
-        self.move_speed = 6.0
+        self.rect.x = 720 / 2
+        self.rect.y = 308
+        self.move_speed = 3.0
 
     def UpdateMovement(self):  # Check for movement and stuff
         if (pygame.key.get_pressed()[pygame.K_LEFT]
