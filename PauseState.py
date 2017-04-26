@@ -11,5 +11,7 @@ class PauseState(GameState.GameState):
             if event.type == pygame.QUIT:
                 self.game.running = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
+                if event.key == pygame.K_F1:
+                    self.game.running = False
+                elif event.key == pygame.K_ESCAPE:
                     self.game.ContinuePlaying()

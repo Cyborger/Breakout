@@ -10,7 +10,7 @@ class Ball(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.move_x = 0.0
         self.move_y = 0.0
-        self.base_speed = 3.0
+        self.base_speed = 6.0
         self.current_speed = self.base_speed
         self.x_speed = self.current_speed / 2.0
         self.y_speed = self.GetCorrespondingY()
@@ -69,9 +69,14 @@ class Ball(pygame.sprite.Sprite):
                 self.InvertYSpeed()
 
     def RandomBounce(self):
-        random_value = random.uniform(-self.current_speed + 1.0, self.current_speed - 1.0)
-        self.x_speed = random_value
-        self.y_speed = 3
+        negative_random = random.randint(-self.current_speed + 1, -1)
+        positive_random = random.randint(1, self.current_speed - 1)
+        choice = random.randint(0, 1)
+        if choice == 0:
+            self.x_speed = negative_random
+        else:
+            self.x_speed = positive_random
+        self.y_speed = self.GetCorrespondingY()
 
     def GetCorrespondingY(self):
         new_y = math.sqrt(self.current_speed**2 - self.x_speed**2)

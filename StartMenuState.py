@@ -23,6 +23,9 @@ class StartMenuState(GameState.GameState):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.game.running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F1:
+                    self.game.running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 for button in self.buttons:
                     if button.hovered:

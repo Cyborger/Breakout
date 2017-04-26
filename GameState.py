@@ -20,4 +20,5 @@ class GameState:
         pass
 
     def UpdateDisplay(self):
+        self.game.draw_screen.blit(pygame.transform.scale(self.game.screen, (self.game.display_info.current_w, self.game.display_info.current_h)), (0, 0))
         pygame.display.flip()
