@@ -3,12 +3,14 @@ import Block
 import copy
 
 class Level:
-    def __init__(self, tmx_path):
+    def __init__(self, tmx_path, ball_start_x = None, ball_start_y = None):
         self.tmx = pytmx.load_pygame(tmx_path)
         self.all_blocks = []
         self.blocks = []
         self.width = self.tmx.width * self.tmx.tilewidth
         self.height = self.tmx.height * self.tmx.tileheight
+        self.ball_x = ball_start_x
+        self.ball_y = ball_start_y
         self.CreateLevel()
 
     def CreateLevel(self):  # Use the tmx path

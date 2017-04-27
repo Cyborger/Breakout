@@ -9,7 +9,13 @@ class PlayingState(GameState.GameState):
         super().__init__(game, "playing")
 
         self.paddle = Paddle.Paddle()
-        starting_ball = Ball.Ball(720 / 2, 300)
+        starting_ball = Ball.Ball(0, 0)
+        if level.ball_x is None and level.ball_y is None:
+            starting_ball.rect.centerx = self.paddle.rect.centerx
+            starting_ball.rect.bottom = self.paddle.rect.top
+        else:
+            starting_ball.rect.x = level.ball_x
+            starting_ball.rect.y = level.ball_y
         self.balls = [starting_ball]
         self.current_level = level
         self.current_level.ResetLevel()
@@ -29,7 +35,7 @@ class PlayingState(GameState.GameState):
         self.wait_for_start.Update()
         if self.wait_for_start.complete:
             # Update paddle
-            self.paddle.UpdateMovement()
+            self.paddle.UpdateMovement(self.balls)
             self.paddle.CheckOutOfBoundry(self.current_level.width, self.current_level.height)
             # Update balls
             for ball in self.balls:

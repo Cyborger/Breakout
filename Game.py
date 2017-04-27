@@ -13,7 +13,7 @@ class Game:
         self.screen_height = 405
         self.display_info = pygame.display.Info()
         self.screen = pygame.Surface((self.screen_width, self.screen_height))
-        self.draw_screen = pygame.display.set_mode((self.display_info.current_w, self.display_info.current_h), pygame.FULLSCREEN)
+        self.draw_screen = pygame.display.set_mode((self.display_info.current_w, self.display_info.current_h))
         self.states = []
         self.current_state = None
         self.running = True
@@ -21,7 +21,7 @@ class Game:
         level_2 = Level.Level("Resources\TMX\Level2.tmx")
         level_3 = Level.Level("Resources\TMX\Level3.tmx")
         level_4 = Level.Level("Resources\TMX\Level4.tmx")
-        level_s = Level.Level("Resources\TMX\Level4.tmx")
+        level_s = Level.Level("Resources\TMX\LevelS.tmx", 0, 0)
         self.levels = [level_1, level_2, level_3, level_4, level_s]
         self.clock = pygame.time.Clock()
 

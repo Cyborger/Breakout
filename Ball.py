@@ -5,7 +5,7 @@ import random
 import math
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x = 0, y = 0):
         self.image = pygame.image.load("Resources/Ball.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.move_x = 0.0
