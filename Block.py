@@ -24,8 +24,8 @@ class Block(pygame.sprite.Sprite):
 
     def Hit(self):  # Has been hit
         self.hits += 1
-        if self.hits > self.animation.tiles_high - 1:
-            self.hits = self.animation.tiles_high - 1
+        if self.hits > len(self.broken_frames) - 1:
+            self.hits = len(self.broken_frames) - 1
         self.image = self.broken_frames[self.hits]
 
     def Update(self):

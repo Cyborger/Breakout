@@ -11,7 +11,10 @@ class StartMenuState(GameState.GameState):
         start = Button.StartGameButton(self.game)
         start.SetPosition(game.screen_width / 2 - start.rect.width /2,
                           game.screen_height / 2 - start.rect.height / 2)
-        self.buttons = [start]
+        exit = Button.ExitGameButton(self.game)
+        exit.SetPosition(game.screen_width / 2 - start.rect.width /2,
+                          (game.screen_height / 2 - start.rect.height / 2) + 100)
+        self.buttons = [start, exit]
         ball_1 = Ball.Ball(200, 300)
         ball_2 = Ball.Ball(400, 200)
         ball_2.InvertXSpeed()

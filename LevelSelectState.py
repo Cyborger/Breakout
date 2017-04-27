@@ -18,8 +18,9 @@ class LevelSelectState(GameState.GameState):
         self.level_s_button = Button.LevelSelectButton(game, "Resources/Buttons/LevelSelectS.png", game.levels[4])
         self.level_s_button.SetPosition(self.game.screen_width - (33 * 2), center_y)
         self.back_button = Button.BackButton(game)
+        self.back_button.SetPosition(self.game.screen_width / 2 - self.back_button.rect.width / 2, self.game.screen_height - self.back_button.rect.height)
         self.buttons = [self.level_1_button, self.level_2_button, self.level_3_button,
-                        self.level_4_button, self.level_s_button]
+                        self.level_4_button, self.level_s_button, self.back_button]
 
     def HandleEvents(self):
         for event in pygame.event.get():
