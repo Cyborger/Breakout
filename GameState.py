@@ -19,6 +19,9 @@ class GameState:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.game.running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F1:
+                    self.game.running = False
 
     def Update(self):  # Update everything that needs to be updated
         pass

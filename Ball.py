@@ -22,10 +22,24 @@ class Ball(pygame.sprite.Sprite):
         self.move_x = 0.0
         self.move_y = 0.0
         self.move_x += self.x_speed
+        self.CheckForHorizontalCollision(collisions)
         self.move_y += self.y_speed
-        self.CheckForCollision(collisions)
+        self.CheckForVerticalCollision(collisions)
 
-    def CheckForCollision(self, collisions):  # Check if it hits a block or the Paddle
+    def CheckForHorizontalCollision(self, collisions):  # Check if it hits a block or the Paddle
+        self.rect.x += self.move_x
+        collisions = pygame.sprite.spritecollide(self, collisions, False)
+        for collide in collisions:
+            if self.move_x > 0.0:
+                self.rect.right = collide.rect.left
+            elif self.move_x < 0.0:
+                self.rect.left = collide.rect.right
+            if isinstance(collide, Block.Block):
+                collide.Hit()
+        if collisions:
+            self.InvertXSpeed()
+
+    def CheckForVerticalCollision(self, collisions):
         self.rect.y += self.move_y
         collisions = pygame.sprite.spritecollide(self, collisions, False)
         for collide in collisions:
@@ -37,19 +51,8 @@ class Ball(pygame.sprite.Sprite):
                 collide.Hit()
             elif isinstance(collide, Paddle.Paddle):
                 self.RandomBounce()
-
         if collisions:
             self.InvertYSpeed()
-
-        self.rect.x += self.move_x
-        collisions = pygame.sprite.spritecollide(self, collisions, False)
-        for collide in collisions:
-            if self.move_x > 0.0:
-                self.rect.right = collide.rect.left
-            elif self.move_x < 0.0:
-                self.rect.left = collide.rect.right
-        if collisions:
-            self.InvertXSpeed()
 
     def CheckForOutOfBoundry(self, level_width, level_height, no_bottom = True):  # Make sure it doesn't go off screen, except for bottom side
         if self.rect.right >= level_width:
@@ -79,7 +82,7 @@ class Ball(pygame.sprite.Sprite):
         self.y_speed = self.GetCorrespondingY()
 
     def GetCorrespondingY(self):
-        new_y = math.sqrt(self.current_speed**2 - self.x_speed**2)
+        new_y = int(math.sqrt(self.current_speed**2 - self.x_speed**2))
         return new_y
 
     def InvertXSpeed(self):

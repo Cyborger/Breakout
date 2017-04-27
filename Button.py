@@ -33,6 +33,15 @@ class Button(pygame.sprite.Sprite):
     def Clicked(self):  # Overwritten by subclasses
         pass
 
+class LevelSelectButton(Button):
+    def __init__(self, game, image_path, level):
+        super().__init__(image_path)
+        self.game = game
+        self.level = level
+
+    def Clicked(self):
+        self.game.ChooseLevel(self.level)
+        
 class StartGameButton(Button):
     def __init__(self, game):
         super().__init__("Resources/StartButton.png")
