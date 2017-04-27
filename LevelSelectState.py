@@ -1,19 +1,22 @@
 import GameState
 import Button
+import pygame
 
 class LevelSelectState(GameState.GameState):
     def __init__(self, game):
         super().__init__(game, "levelselect")
-        self.level_1_button = Button.LevelSelectButton(game, "Resources/LevelSelect1.png", game.levels[0])
-        self.level_1_button.SetPosition(0, 0)
-        self.level_2_button = Button.LevelSelectButton(game, "Resources/LevelSelect2.png", game.levels[1])
-        self.level_2_button.SetPosition(75, 0)
-        self.level_3_button = Button.LevelSelectButton(game, "Resources/LevelSelect3.png", game.levels[2])
-        self.level_3_button.SetPosition(150, 0)
-        self.level_4_button = Button.LevelSelectButton(game, "Resources/LevelSelect4.png", game.levels[3])
-        self.level_4_button.SetPosition(225, 0)
-        self.level_s_button = Button.LevelSelectButton(game, "Resources/LevelSelectS.png", game.levels[4])
-        self.level_s_button.SetPosition(300, 0)
+        center_x = self.game.screen_width / 2 - (33 * 2) / 2
+        center_y = self.game.screen_height / 2 - (33 * 2) / 2
+        self.level_1_button = Button.LevelSelectButton(game, "Resources/Buttons/LevelSelect1.png", game.levels[0])
+        self.level_1_button.SetPosition(0, center_y)
+        self.level_2_button = Button.LevelSelectButton(game, "Resources/Buttons/LevelSelect2.png", game.levels[1])
+        self.level_2_button.SetPosition(center_x / 2, center_y)
+        self.level_3_button = Button.LevelSelectButton(game, "Resources/Buttons/LevelSelect3.png", game.levels[2])
+        self.level_3_button.SetPosition(center_x, center_y)
+        self.level_4_button = Button.LevelSelectButton(game, "Resources/Buttons/LevelSelect4.png", game.levels[3])
+        self.level_4_button.SetPosition(center_x + center_x / 2, center_y)
+        self.level_s_button = Button.LevelSelectButton(game, "Resources/Buttons/LevelSelectS.png", game.levels[4])
+        self.level_s_button.SetPosition(self.game.screen_width - (33 * 2), center_y)
         self.back_button = Button.BackButton(game)
         self.buttons = [self.level_1_button, self.level_2_button, self.level_3_button,
                         self.level_4_button, self.level_s_button]

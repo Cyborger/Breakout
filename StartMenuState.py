@@ -6,7 +6,8 @@ import Ball
 class StartMenuState(GameState.GameState):
     def __init__(self, game):
         super().__init__(game, "startmenu")
-        
+
+        self.title = pygame.image.load("Resources/TitleScreen.png").convert_alpha()
         start = Button.StartGameButton(self.game)
         start.SetPosition(game.screen_width / 2 - start.rect.width /2,
                           game.screen_height / 2 - start.rect.height / 2)
@@ -45,3 +46,6 @@ class StartMenuState(GameState.GameState):
 
         for button in self.buttons:
             self.game.screen.blit(button.image, button.rect)
+
+        self.game.screen.blit(self.title, (self.game.screen_width / 2 - self.title.get_width() / 2,
+                                           (self.game.screen_height / 2 - self.title.get_height() / 2) - 100))

@@ -2,6 +2,7 @@ import StartMenuState
 import PlayingState
 import PauseState
 import GameoverState
+import LevelSelectState
 import Level
 import pygame
 
@@ -17,8 +18,11 @@ class Game:
         self.current_state = None
         self.running = True
         level_1 = Level.Level("Resources\TMX\Level1.tmx")
-        level_1.CreateLevel()
-        self.levels = [level_1]
+        level_2 = Level.Level("Resources\TMX\Level2.tmx")
+        level_3 = Level.Level("Resources\TMX\Level3.tmx")
+        level_4 = Level.Level("Resources\TMX\Level4.tmx")
+        level_s = Level.Level("Resources\TMX\Level4.tmx")
+        self.levels = [level_1, level_2, level_3, level_4, level_s]
         self.clock = pygame.time.Clock()
 
     def Start(self):  # Set starting menu and stuff
@@ -27,8 +31,12 @@ class Game:
         self.NewState(start_menu_state)
         self.GameLoop()
 
-    def StartPlaying(self):
-        playing_state = PlayingState.PlayingState(self, self.levels[0])
+    def GoToLevelSelect(self):
+        level_select_state = LevelSelectState.LevelSelectState(self)
+        self.NewState(level_select_state)
+
+    def ChooseLevel(self, level):
+        playing_state = PlayingState.PlayingState(self, level)
         self.NewState(playing_state)
 
     def Pause(self):

@@ -2,8 +2,8 @@ import pygame
 import Spritesheet
 
 class Button(pygame.sprite.Sprite):
-    def __init__(self, image_path):
-        self.spritesheet = Spritesheet.Spritesheet(image_path, 1, 2, 4)
+    def __init__(self, image_path, scale = 4):
+        self.spritesheet = Spritesheet.Spritesheet(image_path, 1, 2, scale)
         self.not_hovered_image = self.spritesheet.GetImage(0, 0)
         self.hovered_image = self.spritesheet.GetImage(0, 1)
         self.image = self.not_hovered_image.copy()
@@ -35,31 +35,41 @@ class Button(pygame.sprite.Sprite):
 
 class LevelSelectButton(Button):
     def __init__(self, game, image_path, level):
-        super().__init__(image_path)
+        super().__init__(image_path, 2)
         self.game = game
         self.level = level
 
     def Clicked(self):
         self.game.ChooseLevel(self.level)
-        
+
 class StartGameButton(Button):
     def __init__(self, game):
-        super().__init__("Resources/StartButton.png")
+        super().__init__("Resources/Buttons/StartButton.png")
         self.game = game
 
     def Clicked(self):  # Set game state to playing
-        self.game.StartPlaying()
+        self.game.GoToLevelSelect()
 
 class ExitGameButton(Button):
     def __init__(self, game):
+        super().__init__("Resources/Buttons/ExitButton.png")
         self.game = game
 
     def Clicked(self):  # Set game running to false
         self.game.running = False
 
 class ContinueGameButton(Button):
-    def __init__(self):
-        pass
+    def __init__(self, game):
+        super().__init__("Resources/Buttons/ContinueButton.png")
+        self.game = game
 
-    def Clicked(self, game):  # Set game state back to playing
+    def Clicked(self):  # Set game state back to playing
         game.ContinuePlaying()
+
+class BackButton(Button):
+    def __init__(self, game):
+        super().__init__("Resources/Buttons/BackButton.png")
+        self.game = game
+
+    def Clicked(self):
+        self.game.Start()
