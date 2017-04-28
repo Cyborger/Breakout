@@ -57,7 +57,8 @@ class PlayingState(GameState.GameState):
 
     def CheckForWin(self):
         if len(self.current_level.blocks) == 0:
-            self.game.GoToLevelSelect()
+            self.game.LevelComplete()
+            self.game.level_complete_music.play()
 
     def RemoveLostBalls(self):
         for ball in self.balls:
@@ -66,3 +67,4 @@ class PlayingState(GameState.GameState):
 
         if len(self.balls) == 0:
             self.game.GameOver()
+            self.game.gameover_music.play()

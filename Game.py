@@ -3,13 +3,14 @@ import PlayingState
 import PauseState
 import GameoverState
 import LevelSelectState
+import LevelCompleteState
 import Level
 import pygame
 
 class Game:
     def __init__(self):
+        pygame.mixer.pre_init(44100, -16, 1, 512)
         pygame.init()
-        pygame.mixer.pre_init()
         self.screen_width = 720
         self.screen_height = 405
         self.display_info = pygame.display.Info()
@@ -26,6 +27,8 @@ class Game:
         self.levels = [level_1, level_2, level_3, level_4, level_s]
         self.clock = pygame.time.Clock()
         self.theme_music = pygame.mixer.Sound("Resources/Music/ThemeSong.wav")
+        self.gameover_music = pygame.mixer.Sound("Resources/Music/GameOver.wav")
+        self.level_complete_music = pygame.mixer.Sound("Resources/Music/LevelComplete.wav")
 
     def Start(self):  # Set starting menu and stuff
         self.ClearStates()
@@ -51,6 +54,10 @@ class Game:
     def ContinuePlaying(self):
         self.ChangeState(self.FindState("playing"))
         self.RemoveState(self.FindState("paused"))
+
+    def LevelComplete(self):
+        level_complete_state = LevelCompleteState.LevelCompleteState(self)
+        self.NewState(level_complete_state)
 
     def GameOver(self):
         gameover_state = GameoverState.GameoverState(self)
