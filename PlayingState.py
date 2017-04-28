@@ -44,6 +44,7 @@ class PlayingState(GameState.GameState):
                 ball.CheckForOutOfBoundry(self.current_level.width, self.current_level.height)
             # Update blocks
             self.current_level.UpdateBlocks()
+        self.CheckForWin()
         self.RemoveLostBalls()
 
 
@@ -53,6 +54,10 @@ class PlayingState(GameState.GameState):
             self.game.screen.blit(ball.image, ball.rect)
         for block in self.current_level.blocks:
             self.game.screen.blit(block.image, block.rect)
+
+    def CheckForWin(self):
+        if len(self.current_level.blocks) == 0:
+            self.game.GoToLevelSelect()
 
     def RemoveLostBalls(self):
         for ball in self.balls:

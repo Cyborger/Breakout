@@ -65,6 +65,7 @@ class ExitToLevelSelect(Button):
 
     def Clicked(self):
         self.game.GoToLevelSelect()
+        self.game.theme_music.play()
 
 class ContinueGameButton(Button):
     def __init__(self, game):

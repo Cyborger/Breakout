@@ -9,6 +9,7 @@ import pygame
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.mixer.pre_init()
         self.screen_width = 720
         self.screen_height = 405
         self.display_info = pygame.display.Info()
@@ -24,11 +25,14 @@ class Game:
         level_s = Level.Level("Resources\TMX\LevelS.tmx", 0, 0)
         self.levels = [level_1, level_2, level_3, level_4, level_s]
         self.clock = pygame.time.Clock()
+        self.theme_music = pygame.mixer.Sound("Resources/Music/ThemeSong.wav")
 
     def Start(self):  # Set starting menu and stuff
         self.ClearStates()
         start_menu_state = StartMenuState.StartMenuState(self)
         self.NewState(start_menu_state)
+        if self.theme_music.get_num_channels() == 0:
+            self.theme_music.play()
         self.GameLoop()
 
     def GoToLevelSelect(self):
@@ -38,6 +42,7 @@ class Game:
     def ChooseLevel(self, level):
         playing_state = PlayingState.PlayingState(self, level)
         self.NewState(playing_state)
+        self.theme_music.stop()
 
     def Pause(self):
         pause_state = PauseState.PauseState(self)

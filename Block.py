@@ -13,6 +13,7 @@ class Block(pygame.sprite.Sprite):
         self.hits = 0
         self.break_timer = Timer.Timer(2)
         self.broken = False
+        self.break_sound = pygame.mixer.Sound(file = "Resources/Music/Coin.wav")
 
     def GatherFrames(self, number_of_animations):
         for i in range(number_of_animations + 1):
@@ -30,6 +31,8 @@ class Block(pygame.sprite.Sprite):
 
     def Update(self):
         if self.hits >= self.hits_needed:
+            if self.break_timer.current_passes == 0:
+                self.break_sound.play()
             self.break_timer.Update()
         if self.break_timer.complete:
             self.broken = True
