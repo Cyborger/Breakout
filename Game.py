@@ -15,7 +15,7 @@ class Game:
         self.screen_height = 405
         self.display_info = pygame.display.Info()
         self.screen = pygame.Surface((self.screen_width, self.screen_height))
-        self.draw_screen = pygame.display.set_mode((self.display_info.current_w, self.display_info.current_h), pygame.FULLSCREEN)
+        self.draw_screen = pygame.display.set_mode((self.display_info.current_w, self.display_info.current_h))
         self.states = []
         self.current_state = None
         self.running = True
