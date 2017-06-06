@@ -40,6 +40,7 @@ class Game:
 
     def GoToLevelSelect(self):
         level_select_state = LevelSelectState.LevelSelectState(self)
+        self.RemoveState(self.FindState("playing"))
         self.NewState(level_select_state)
 
     def ChooseLevel(self, level):
@@ -57,17 +58,20 @@ class Game:
 
     def LevelComplete(self):
         level_complete_state = LevelCompleteState.LevelCompleteState(self)
+        self.RemoveState(self.FindState("playing"))
         self.NewState(level_complete_state)
 
     def GameOver(self):
         gameover_state = GameoverState.GameoverState(self)
+        self.RemoveState(self.FindState("playing"))
         self.NewState(gameover_state)
 
     def ChangeState(self, state):  # See if state exists in states and act accordingly
         self.current_state = state
 
     def RemoveState(self, state):  # Remove state from states
-        self.states.remove(state)
+        if state in self.states:
+            self.states.remove(state)
 
     def NewState(self, state):  # Add state to states and set to current
         self.states.append(state)
