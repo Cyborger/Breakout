@@ -13,8 +13,6 @@ class GameoverState(GameState.GameState):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_F1:
                     self.game.running = False
-                else:
-                    self.game.Start()
 
     def Update(self):
         if not pygame.mixer.get_busy():
