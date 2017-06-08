@@ -7,7 +7,7 @@ exe=Executable(
 includefiles=["Resources"]
 includes=[]
 excludes=[]
-packages=["pygame", "ZedLib"]
+packages=["pygame"]
 setup(
      version = "1.0",
      description = "Breakout clone",
